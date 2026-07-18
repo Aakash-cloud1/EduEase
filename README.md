@@ -31,15 +31,18 @@ EduEase utilizes a **Three-Tier Web Architecture** separating the presentation l
 
 ### System Architecture
 ![System Architecture](assets/figure1_system_architecture.png)
+
 *Figure 1: High-level system interaction model mapping frontend components to backend modules via a common XAMPP infrastructure.*
 
 ### Data Flow Diagrams (DFD)
 #### Level 0 Context Diagram
 ![DFD Level 0](assets/figure2_dfd_level0.png)
+
 *Figure 2: Top-level boundaries highlighting data interaction channels between external entities (Students, Teachers, Admins) and the core platform process.*
 
 #### Level 1 Behavioral Diagram
 ![DFD Level 1](assets/figure3_dfd_level1.png)
+
 *Figure 3: Internal architectural breakdown showing data paths moving between authorization blocks, assignment stores, and feedback engines.*
 
 ---
