@@ -1,67 +1,95 @@
-# EduEase
+# EduEase: Simplifying Education Management
 
-EduEase is a comprehensive educational management system built with PHP and MySQL. It provides tailored dashboards and functionalities for students, teachers, and administrators to streamline academic processes, communication, and record-keeping.
+EduEase is a responsive, web-based academic management platform designed to streamline communication, resource sharing, and core administrative workflows between students, teachers, and administrators. It addresses critical operational inefficiencies in educational institutions—such as manual timetable coordination, student performance tracking, and complex exam invigilation scheduling—by providing an automated, role-based centralized dashboard.
 
-## Features
+---
 
-*   **Role-Based Access Control:** Secure login and registration system with distinct roles: Admin, Teacher, and Student.
-*   **Student Dashboard:**
-    *   View academic performance (marks, SGPA, CGPA).
-    *   Manage and update personal profiles.
-    *   Real-time chat functionality with peers and teachers.
-*   **Teacher Dashboard:**
-    *   Update and manage student marks.
-    *   View submitted feedback from students.
-    *   Access and review student profiles.
-*   **Admin Dashboard:**
-    *   Manage user accounts and system settings.
-    *   Add new students to the system.
-*   **Feedback System:** Built-in mechanism for students to submit feedback to teachers.
-*   **AJAX Integration:** Dynamic data loading for a seamless user experience.
+## Key Features
 
-## Technologies Used
+*   **Role-Based Access Control (RBAC):** Tailored dashboards and secure session-based navigation for Students, Teachers, and Administrators.
+*   **Automated Timetable Generator:** Dynamic conflict-free scheduling engine that maps subjects and labs sequentially based on faculty and room availability.
+*   **Assignment Lifecycle Management:** End-to-end framework enabling teachers to distribute tasks and grade submissions, and students to download/upload coursework.
+*   **Student Performance Analytics:** Comprehensive dashboard visualizing GPA trends, mid-term scores, and cumulative progress to facilitate data-driven academic insights.
+*   **Anonymous Feedback System:** Secure evaluation engine allowing students to submit anonymous reviews for faculty and course optimization.
+*   **Invigilator Assigner:** Automated exam duty coordinator leveraging scheduling optimization logic to allocate duties equitably among faculty.
 
-*   **Frontend:** HTML5, CSS3, JavaScript (Vanilla)
-*   **Backend:** PHP (Session Management, Password Hashing)
-*   **Database:** MySQL
+---
 
-## Getting Started
+## Technology Stack
+
+*   **Frontend:** HTML5, CSS3, JavaScript (ES6+ / AJAX)
+*   **Backend:** PHP (Modular, session-controlled)
+*   **Database:** MySQL 8.0+ (Relational schema with foreign key constraints)
+*   **Environment & Local Hosting:** XAMPP (Apache Server & MySQL Engine)
+*   **Production/Deployment:** Vercel (Frontend UI Hosting), AWS EC2 (LAMP Stack / Backend & DB)
+
+---
+
+## Architecture & System Design
+
+EduEase utilizes a **Three-Tier Web Architecture** separating the presentation layer, business logic engine, and underlying data persistence layer to maximize security and horizontal scalability.
+
+### System Architecture
+![System Architecture](assets/figure1_system_architecture.png)
+*Figure 1: High-level system interaction model mapping frontend components to backend modules via a common XAMPP infrastructure.*
+
+### Data Flow Diagrams (DFD)
+#### Level 0 Context Diagram
+![DFD Level 0](assets/figure2_dfd_level0.png)
+*Figure 2: Top-level boundaries highlighting data interaction channels between external entities (Students, Teachers, Admins) and the core platform process.*
+
+#### Level 1 Behavioral Diagram
+![DFD Level 1](assets/figure3_dfd_level1.png)
+*Figure 3: Internal architectural breakdown showing data paths moving between authorization blocks, assignment stores, and feedback engines.*
+
+---
+
+## Prototype Screenshots
+
+| Welcome Page | Login Portal |
+| :---: | :---: |
+| ![Welcome Page](assets/figure4_welcome_page.png) <br> *Figure 4: Initial application landing screen.* | ![Login Page](assets/figure5_login_page.png) <br> *Figure 5: Secure credential authentication.* |
+
+| Registration Form | Generated Timetable |
+| :---: | :---: |
+| ![Register Page](assets/figure6_register_page.png) <br> *Figure 6: Role selection and user provisioning.* | ![Generated Timetable](assets/figure7_generated_timetable.png) <br> *Figure 7: Dynamic conflict-free scheduling matrix.* |
+
+| Invigilator Duty Assigner | Student Feedback System |
+| :---: | :---: |
+| ![Invigilator Assigner](assets/figure8_invigilator_assigner.png) <br> *Figure 8: Matrix distribution for exam scheduling.* | ![Feedback System](assets/figure9_feedback_system.png) <br> *Figure 9: Secure, anonymous course evaluation portal.* |
+
+---
+
+## Getting Started & Installation
 
 ### Prerequisites
+*   Install XAMPP (with Apache and MySQL modules).
+*   A modern web browser (Chrome, Firefox, Edge, or Safari).
 
-*   PHP >= 7.4
-*   MySQL >= 8.0
-*   A local server environment (e.g., XAMPP, WAMP, or PHP Built-in Server)
+### Local Setup Instructions
+1.  **Clone the Repository:**
+    ```bash
+    git clone [https://github.com/your-username/EduEase.git](https://github.com/your-username/EduEase.git)
+    ```
+2.  **Move to Web Root:** 
+    Move the cloned project folder into your XAMPP local server path (typically `C:/xampp/htdocs/EduEase`).
+3.  **Database Configuration:**
+    *   Open XAMPP Control Panel and start **Apache** and **MySQL**.
+    *   Navigate to `http://localhost/phpmyadmin/`.
+    *   Create a new database named `eduease`.
+    *   Import your structural database backup schema (e.g., `database/eduease.sql`) into the newly created database.
+4.  **Configure Connection:**
+    Check `config.php` or your database wrapper script to ensure correct connection parameters:
+    ```php
+    $conn = new mysqli("localhost", "root", "", "eduease");
+    ```
+5.  **Run the Platform:**
+    Open your browser and navigate to: `http://localhost/EduEase/`
 
-### Installation & Setup
+---
 
-1.  **Clone or Download the repository** to your local machine.
-2.  **Database Setup:**
-    *   Ensure your MySQL server is running.
-    *   Create a new MySQL database named `user_db`.
-    *   *Note: The project requires specific tables to be present in `user_db` (`chat_messages`, `feedback`, `marks`, `student_profiles`, `students`, `subjects`, and `user_db` table).*
-3.  **Configuration:**
-    *   Open `config.php`.
-    *   Update the database credentials if necessary. The default configuration is:
-        ```php
-        $host = "localhost";
-        $user = "root";
-        $password = "";
-        $database = "user_db";
-        $port = 3306;
-        ```
-4.  **Run the Application:**
-    *   **Using XAMPP/WAMP:** Place the project folder in your server's root directory (e.g., `htdocs` for XAMPP) and navigate to `http://localhost/path-to-project` in your browser.
-    *   **Using PHP Built-in Server:** Open your terminal, navigate to the project directory, and run:
-        ```bash
-        php -S localhost:8080
-        ```
-        Then, open `http://localhost:8080/index.php` in your web browser.
-
-## File Structure Highlights
-
-*   `config.php`: Database connection settings.
-*   `index.php` / `login.php`: Application entry point and authentication interface.
-*   `login_register.php`: Backend logic for user authentication.
-*   `style.css` / `script.js`: Global styles and client-side logic.
-*   `user_page.php`, `teacher_page.php`, `admin_page.php`: Role-specific dashboard views.
+## Future Enhancements
+1.  **Mobile Application Integration:** Construct companion apps for Android/iOS featuring real-time push notifications.
+2.  **LMS Synchronization:** Build sync adapters for Moodle, Canvas, and Google Classroom APIs.
+3.  **AI Performance Analytics:** Leverage basic machine learning algorithms to map individual study recommendations based on performance trends.
+4.  **Automated Attendance Systems:** Integrate biometric hardware or RFID scanners to capture real-time attendance logs.
